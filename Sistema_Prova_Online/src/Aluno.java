@@ -25,5 +25,7 @@ public class Aluno extends Pessoa {
 	public String toString() {
 		return super.toString() + "/" +
 			   this.getTelefone() + "/";
+		
+		// Teste aqui
 	}
 }
