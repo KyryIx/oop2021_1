@@ -2,6 +2,7 @@ public class Disciplina {
 	private String codigo;
 	private String nome;
 	private String ementa;
+	private String semestre;
 	
 	public Disciplina() {
 		this.codigo = "";
