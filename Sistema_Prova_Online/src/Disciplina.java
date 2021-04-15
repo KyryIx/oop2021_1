@@ -34,8 +34,17 @@ public class Disciplina {
 		this.ementa = ementa;
 	}
 	
+	public String getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(String semestre) {
+		this.semestre = semestre;
+	}
+	
 	public String toString() {
 		return this.getCodigo() + "/" +
+	           this.getSemestre() + "/" +
 			   this.getNome() + "/" +
 			   this.getEmenta();
 	}
