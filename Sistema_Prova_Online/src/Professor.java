@@ -1,18 +1,27 @@
 import java.util.ArrayList;
 
 public class Professor extends Pessoa {
-	private ArrayList<String> turmas;
+	private ArrayList<Disciplina> disciplinas;
+	private ArrayList<Turma> turmas;
 	
 	public Professor() {
 		super();
 		this.turmas.clear();
 	}
+	
+	public ArrayList<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
 
-	public ArrayList<String> getTurmas() {
+	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+	public ArrayList<Turma> getTurmas() {
 		return turmas;
 	}
 
-	public void setTurmas(ArrayList<String> turmas) {
+	public void setTurmas(ArrayList<Turma> turmas) {
 		this.turmas = turmas;
 	}
 	

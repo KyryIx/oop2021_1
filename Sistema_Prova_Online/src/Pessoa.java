@@ -3,7 +3,6 @@ public class Pessoa {
 	private String sobrenome;
 	private int idade;
 	private int id;
-	private String disciplina;
 	
 	public Pessoa() {
 		this.nome = "";
@@ -43,20 +42,11 @@ public class Pessoa {
 	public void setId( int id ) {
 		this.id = id;
 	}
-	
-	public String getDisciplina() {
-		return disciplina;
-	}
-
-	public void setDisciplina(String disciplina) {
-		this.disciplina = disciplina;
-	}
 
 	public String toString() {
 		return this.getNome() + "/" +
 			   this.getSobrenome() + "/" +
 			   this.getIdade() + "/" +
-			   this.getId() + "/" +
-			   this.getDisciplina();
+			   this.getId() + "/";
 	}
 }
