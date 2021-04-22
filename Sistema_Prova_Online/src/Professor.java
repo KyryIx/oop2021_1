@@ -6,7 +6,6 @@ public class Professor extends Pessoa {
 	
 	public Professor() {
 		super();
-		this.turmas.clear();
 	}
 	
 	public ArrayList<Disciplina> getDisciplinas() {
