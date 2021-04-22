@@ -1,11 +1,11 @@
 public class Curso {
 	private String nome;
-	private Grade grade;
+	//private Grade grade;
 	private int codigo;
 	
 	public Curso() {
 		this.nome = "";
-		this.grade = new Grade();
+		//this.grade = new Grade();
 		this.codigo = 0;
 	}
 	
@@ -17,13 +17,13 @@ public class Curso {
 		this.nome = nome;
 	}
 	
-	public Grade getGrade() {
+	/*public Grade getGrade() {
 		return grade;
-	}
+	}*/
 	
-	public void setGrade(Grade grade) {
+	/*public void setGrade(Grade grade) {
 		this.grade = grade;
-	}
+	}*/
 	
 	public int getCodigo() {
 		return codigo;
