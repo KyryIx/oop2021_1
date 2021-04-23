@@ -80,14 +80,43 @@ public final class Sistema {
 		ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
 		disciplinas.add( disciplina );
 		professor.setDisciplinas( disciplinas );
+		avaliacao1.setProfessor( professor );
 		
 		Nota nota = new Nota();
 		nota.setPeso(  0.40f ); // 40% do semestre
+		avaliacao1.setNota( nota );
 		
-		System.out.println( "NOME DO ALUNO: " +
+		System.out.println( " NOME DO ALUNO: " +
 				avaliacao1.getAluno().getNome() + " " +
 				avaliacao1.getAluno().getSobrenome() );
 		
+		System.out.println( "    DISCIPLINA: " + 
+		         avaliacao1.getAluno().getDisciplina().getNome() );
+		
+		System.out.println( "         CURSO: " +
+		         avaliacao1.getCurso().getNome() );
+		
+		System.out.println( "     PROFESSOR: " + 
+		         avaliacao1.getProfessor().getNome() );
+		
+		System.out.println( "          DATA: " + 
+		         avaliacao1.getDataAvaliacao().getDay() + "/" +
+				 avaliacao1.getDataAvaliacao().getMonth() + "/" +
+		         avaliacao1.getDataAvaliacao().getYear() );
+		
+		System.out.println( "PESO AVALIACAO: " + 
+		         (avaliacao1.getNota().getPeso()*100) + "%" );
+		
+		Nota av1 = avaliacao1.getNota();
+		av1.setValor( 9.0f );
+		avaliacao1.setNota( av1 );
+		
+		// ATIVIDADE PARA A CASA:
+		// 1 - IMPLEMENTAR A EXIBICAO DAS QUESTOES
+		// 2 - AO MESMO TEMPO QUE EXIBE UMA QUESTAO,
+		//     PEDIR A RESPOSTA PARA DAR O RESULTADO
+		//     SE ACERTOU OU ERRO. PARA ISSO USE O
+		//     Scanner DO Java.
 	}
 
 }
