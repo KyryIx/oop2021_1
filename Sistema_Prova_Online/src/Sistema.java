@@ -117,6 +117,28 @@ public final class Sistema {
 		//     PEDIR A RESPOSTA PARA DAR O RESULTADO
 		//     SE ACERTOU OU ERRO. PARA ISSO USE O
 		//     Scanner DO Java.
+		
+		/*
+		 NOME DO ALUNO: Paulo Rodrigues
+		    DISCIPLINA: Projeto Orientado a Objetos
+		         CURSO: Sistemas de Informação
+		     PROFESSOR: Everton
+		          DATA: 5/4/2021
+		PESO AVALIACAO: 40.0%
+		
+		Questao 1 - Qual o resultado da expressao 1 + 1?
+		Alternatica 1 - Branco
+		Alternatica 2 - Preto
+		Alternatica 3 - Marrom
+		Alternatica 4 - Azul escuro
+		Alternatica 5 - Nenhumas das anteriores
+		
+		Digite o numero da alternativa e pressione ENTER: 2
+		Resposta: INCORRETA (0.0 pontos)
+		
+		
+		
+		*/
 	}
 
 }
