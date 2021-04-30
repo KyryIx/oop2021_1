@@ -61,6 +61,7 @@ public final class Sistema {
 		turma1.setCurso( curso );
 		
 		aluno1.setTurma( turma1 );
+		aluno1.insertData();
 		
 		avaliacao1.setAluno( aluno1 );
 		avaliacao1.setTurma( turma1 );
@@ -135,10 +136,11 @@ public final class Sistema {
 		
 		Digite o numero da alternativa e pressione ENTER: 2
 		Resposta: INCORRETA (0.0 pontos)
-		
-		
-		
 		*/
+		
+		BancoDados banco = new BancoDados();
+		banco.persist(aluno1);
+		banco.persist(professor);
 	}
 
 }

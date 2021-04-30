@@ -15,6 +15,14 @@ public class Aluno extends Pessoa {
 		this.setId(0);
 		*/
 	}
+	
+	public void insertData(){
+		BancoDados banco = new BancoDados();
+		String sql = "INSERT INTO aluno(" +
+	             "nome, sobrenome, idade)" +
+	             "VALUES('Luiz','Pereira',18)";
+		banco.insertRegister( sql );
+	}
 
 	public Disciplina getDisciplina() {
 		return disciplina;
