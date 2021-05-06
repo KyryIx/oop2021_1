@@ -1,12 +1,4 @@
-/*
-   CREATE TABLE `test`.`pessoa` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(64) NOT NULL,
-  `sobrenome` VARCHAR(128) NOT NULL,
-  `idade` INT NOT NULL,
-   PRIMARY KEY (`id`));
- */
-public class Pessoa {
+public abstract class Pessoa {
 	private int id;
 	private String nome;
 	private String sobrenome;
