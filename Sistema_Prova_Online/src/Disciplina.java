@@ -1,20 +1,20 @@
 public class Disciplina {
-	private String codigo;
+	private int codigo;
 	private String nome;
 	private String ementa;
 	private String semestre;
 	
 	public Disciplina() {
-		this.codigo = "";
+		this.codigo = 0;
 		this.nome = "";
 		this.ementa = "";
 	}
 	
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 	
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	

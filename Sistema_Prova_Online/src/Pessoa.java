@@ -1,5 +1,5 @@
 public abstract class Pessoa {
-	private int id;
+	private int codigo;
 	private String nome;
 	private String sobrenome;
 	private int idade;
@@ -8,7 +8,7 @@ public abstract class Pessoa {
 		this.nome = "";
 		this.sobrenome = "";
 		this.idade = 0;
-		this.id = 0;
+		this.codigo = 0;
 	}
 	
 	public String getNome(){
@@ -35,18 +35,18 @@ public abstract class Pessoa {
 		this.idade = idade;
 	}
 	
-	public int getId() {
-		return this.id;
+	public int getCodigo() {
+		return this.codigo;
 	}
 	
-	public void setId( int id ) {
-		this.id = id;
+	public void setCodigo( int codigo ) {
+		this.codigo = codigo;
 	}
 
 	public String toString() {
 		return this.getNome() + "/" +
 			   this.getSobrenome() + "/" +
 			   this.getIdade() + "/" +
-			   this.getId() + "/";
+			   this.getCodigo() + "/";
 	}
 }
