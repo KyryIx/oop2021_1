@@ -31,4 +31,9 @@ public class Aluno extends Pessoa {
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
+	
+	public String toString() {
+		return this.getCodigo() + "/" + this.getNome() + "/" +
+	           this.getSobrenome() + "/" + this.getIdade();
+	}
 }

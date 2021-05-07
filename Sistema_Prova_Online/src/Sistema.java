@@ -6,19 +6,30 @@ public final class Sistema {
 	public static void main(String[] args) {
 		BancoDados banco = new BancoDados();
 		
+		// DEFINICAO DO CURSO
+		Curso curso = new Curso();
+		curso.setCodigo( 5464984 );
+		curso.setNome( "Sistemas de Informação" );
+		
+		// DEFINICAO DA TURMA
+		Turma turma = new Turma();
+		turma.setCodigo( 4516 );
+		turma.setCurso( curso );
+		banco.inserirTurma( turma );
+		
 		// DEFINICAO DA DISCIPLINA
 		Disciplina disciplina = new Disciplina();
 		disciplina.setCodigo( 15245 );
 		disciplina.setEmenta( "Técnicas de programação Orientada a objetos. Tecnologias orientadas a objetos." );
 		disciplina.setNome( "Projeto Orientado a Objetos" );
 		disciplina.setSemestre( "6 semestre" );
+		banco.inserirDisciplina( disciplina );  // <------- INSERINDO O DISCIPLINA Projeto NO SISTEMA
 				
-		Turma turma = new Turma();
-		turma.setCodigo( 4516 );
+		
 		
 		// DEFINICAO DO ALUNO
 		Aluno aluno1 = new Aluno();
-		aluno1.setCodigo( 1668730 );
+		aluno1.setCodigo( 1668740 );
 		aluno1.setNome( "Paulo" );
 		aluno1.setSobrenome( "Rodrigues" );
 		aluno1.setIdade( 18 );
@@ -26,7 +37,11 @@ public final class Sistema {
 		aluno1.setTurma(turma);
 		banco.inserirAluno(aluno1);  // <------- INSERINDO O ALUNO PAULO NO SISTEMA
 		
+		System.out.println("Inserido");
 		
+		Aluno alunoPesquisa = banco.consultarAluno( 1668730 );
+		
+		System.out.println( alunoPesquisa.toString() );
 		
 		
 		
@@ -72,9 +87,7 @@ public final class Sistema {
 		
 		
 		
-		Curso curso = new Curso();
-		curso.setCodigo( 5464984 );
-		curso.setNome( "Sistemas de Informação" );
+		
 		
 		turma1.setCurso( curso );
 		
