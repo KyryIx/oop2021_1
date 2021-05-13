@@ -25,8 +25,6 @@ public final class Sistema {
 		disciplina.setSemestre( "6 semestre" );
 		banco.inserirDisciplina( disciplina );  // <------- INSERINDO O DISCIPLINA Projeto NO SISTEMA
 				
-		
-		
 		// DEFINICAO DO ALUNO
 		Aluno aluno1 = new Aluno();
 		aluno1.setCodigo( 1668740 );
@@ -42,12 +40,6 @@ public final class Sistema {
 		Aluno alunoPesquisa = banco.consultarAluno( 1668730 );
 		
 		System.out.println( alunoPesquisa.toString() );
-		
-		
-		
-		
-		
-		
 		
 		/*
 		Avaliacao avaliacao1 = new Avaliacao();
