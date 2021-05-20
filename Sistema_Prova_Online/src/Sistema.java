@@ -1,47 +1,141 @@
 import java.util.ArrayList;
-import java.util.Date;
+
+import DAO.AlunoDAOMySQL;
+import DAO.CursoDAOMySQL;
+import DAO.DisciplinaDAOMySQL;
+import DAO.GradeDAOMySQL;
+import DAO.ProfessorDAOMySQL;
+import DAO.TurmaDAOMySQL;
+import Objetos.Aluno;
+import Objetos.Curso;
+import Objetos.Disciplina;
+import Objetos.Grade;
+import Objetos.Professor;
+import Objetos.Turma;
 
 // "final" -> nao permite criacao de classes filhas
 public final class Sistema {
+	
 	public static void main(String[] args) {
-		BancoDados banco = new BancoDados();
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////// INSERCAO DE DISCIPLINAS NO SISTEMA ////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		DisciplinaDAOMySQL disciplinaDaoMySQL = new DisciplinaDAOMySQL();
 		
-		// DEFINICAO DO CURSO
-		Curso curso = new Curso();
-		curso.setCodigo( 5464984 );
-		curso.setNome( "Sistemas de Informação" );
+		Disciplina disciplina1 = new Disciplina();
+		disciplina1.setCodigo( 15245 );
+		disciplina1.setNome( "Projeto Orientado a Objetos" );
+		disciplina1.setEmenta( "Técnicas de programação Orientada a objetos. Tecnologias orientadas a objetos." );
 		
-		// DEFINICAO DA TURMA
-		Turma turma = new Turma();
-		turma.setCodigo( 4516 );
-		turma.setCurso( curso );
-		banco.inserirTurma( turma );
+		disciplinaDaoMySQL.inserirDisciplina( disciplina1 );
 		
-		// DEFINICAO DA DISCIPLINA
-		Disciplina disciplina = new Disciplina();
-		disciplina.setCodigo( 15245 );
-		disciplina.setEmenta( "Técnicas de programação Orientada a objetos. Tecnologias orientadas a objetos." );
-		disciplina.setNome( "Projeto Orientado a Objetos" );
-		disciplina.setSemestre( "6 semestre" );
-		banco.inserirDisciplina( disciplina );  // <------- INSERINDO O DISCIPLINA Projeto NO SISTEMA
-				
-		// DEFINICAO DO ALUNO
+		Disciplina disciplina2 = new Disciplina();
+		disciplina2.setCodigo( 15328 );
+		disciplina2.setNome( "Programação WEB" );
+		disciplina2.setEmenta( "Programação de páginas WEB, aplicação de estilos e tratamento de informações enviadas por formulários." );
+		
+		disciplinaDaoMySQL.inserirDisciplina( disciplina2 );
+		
+		disciplinaDaoMySQL.fechar();
+		
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DE GRADE NO SISTEMA //////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		GradeDAOMySQL gradeDaoMySQL = new GradeDAOMySQL();
+		
+		Grade grade1 = new Grade();
+		grade1.setCodigo( 8531 );
+		
+		// Formato -> apenas um semestre com duas disciplinas (15245, 15328) no mesmo semestres
+		ArrayList<ArrayList<Disciplina>> semestresTipo1 = new ArrayList<ArrayList<Disciplina>>();
+		semestresTipo1.add( new ArrayList<Disciplina>() );
+		semestresTipo1.add( new ArrayList<Disciplina>() );
+		semestresTipo1.get(0).set(0, disciplina1);
+		semestresTipo1.get(0).set(1, disciplina2);
+		
+		grade1.setDisciplinas( semestresTipo1 );
+		
+		gradeDaoMySQL.inserirGrade( grade1 );
+		
+		Grade grade2 = new Grade();
+		grade2.setCodigo( 8548 );
+		
+		// Formato -> dois semestres com apenas uma disciplina em cada semestre (15245, 15328)
+		ArrayList<ArrayList<Disciplina>> semestresTipo2 = new ArrayList<ArrayList<Disciplina>>();
+		semestresTipo1.add( new ArrayList<Disciplina>() );
+		semestresTipo1.get(0).add(disciplina1);
+		semestresTipo1.get(0).add(disciplina2);
+		
+		grade1.setDisciplinas( semestresTipo2 );
+		
+		gradeDaoMySQL.inserirGrade( grade2 );
+		
+		gradeDaoMySQL.fechar();
+		
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DE CURSO NO SISTEMA //////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		CursoDAOMySQL cursoDaoMySQL = new CursoDAOMySQL();
+		
+		Curso curso1 = new Curso();
+		curso1.setCodigo( 481 );
+		curso1.setNome( "Sistema de Informação" );
+		curso1.setGrade(grade2);
+		
+		cursoDaoMySQL.inserirCurso( curso1 );
+		
+		cursoDaoMySQL.fechar();
+		
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DA TURMA NO SISTEMA //////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		TurmaDAOMySQL turmaDaoMySQL = new TurmaDAOMySQL();
+		
+		Turma turma1 = new Turma();
+		turma1.setCodigo( 4516 );
+		turma1.setCurso( curso1 );
+		
+		turmaDaoMySQL.inserirTurma( turma1 );
+		
+		turmaDaoMySQL.fechar();
+		
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DO PROFESSOR NO SISTEMA //////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		ProfessorDAOMySQL ProfessorDaoMySQL = new ProfessorDAOMySQL();
+		
+		Professor professor1 = new Professor();
+		professor1.setCodigo( 100100789 );
+		professor1.setNome( "Everton" );
+		professor1.setSobrenome( "Pereira" );
+		professor1.setIdade( 41 );
+		professor1.setDisciplina( disciplina1 );
+		professor1.setTurma( turma1 );
+		
+		ProfessorDaoMySQL.inserirProfessor( professor1 );
+		
+		ProfessorDaoMySQL.fechar();
+		
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DO PROFESSOR NO SISTEMA //////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		AlunoDAOMySQL alunoDaoMySQL = new AlunoDAOMySQL();
+		
 		Aluno aluno1 = new Aluno();
 		aluno1.setCodigo( 1668740 );
 		aluno1.setNome( "Paulo" );
 		aluno1.setSobrenome( "Rodrigues" );
 		aluno1.setIdade( 18 );
-		aluno1.setDisciplina(disciplina);
-		aluno1.setTurma(turma);
-		banco.inserirAluno(aluno1);  // <------- INSERINDO O ALUNO PAULO NO SISTEMA
+		aluno1.setDisciplina( disciplina1 );
+		aluno1.setTurma( turma1 );
 		
-		System.out.println("Inserido");
+		alunoDaoMySQL.inserirAluno( aluno1 );
 		
-		Aluno alunoPesquisa = banco.consultarAluno( 1668730 );
+		alunoDaoMySQL.fechar();
 		
-		System.out.println( alunoPesquisa.toString() );
 		
-		/*
+		
+	/*	
 		Avaliacao avaliacao1 = new Avaliacao();
 		
 		///////// DEFINICAO DAS QUESTOES DA AVALIACAO 1 ///////// 
