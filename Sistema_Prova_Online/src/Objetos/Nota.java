@@ -1,10 +1,20 @@
+package Objetos;
 public class Nota {
+	private int codigo;
 	private float valor;
 	private float peso;
 	
 	public Nota() {
 		this.valor = 0.0f;
 		this.valor = 0.0f;
+	}
+	
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
 	public float getValor() {

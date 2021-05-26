@@ -18,7 +18,7 @@ public class TurmaDAOMySQL implements TurmaDAO {
 	public boolean inserirTurma( Turma turma ) {
 		String sql;
 		sql  = "INSERT INTO ";
-		sql += "aluno(codigo, fk_curso)";
+		sql += "turma(codigo, fk_curso)";
 		sql += "VALUES(";
 		sql += turma.getCodigo() + ", " + turma.getCurso().getCodigo() + ")";
 		return (this.mysql.atualizar( sql ) > 0 ? true : false);

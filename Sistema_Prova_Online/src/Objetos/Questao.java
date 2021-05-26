@@ -1,6 +1,9 @@
+package Objetos;
 import java.util.ArrayList;
 
 public class Questao {
+	private int codigo;
+	private float valor;
 	private float peso;
 	private String descricao;
 	private ArrayList<String> respostas;
@@ -11,6 +14,22 @@ public class Questao {
 		this.descricao = "";
 		this.respostas = new ArrayList<String>();
 		this.indiceRespostaCorreta = 0;
+	}
+	
+	public int getCodigo() {
+		return codigo;
+	}
+	
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	
+	public float getValor() {
+		return valor;
+	}
+	
+	public void setValor(float valor) {
+		this.valor = valor;
 	}
 	
 	public float getPeso() {
@@ -37,11 +56,29 @@ public class Questao {
 		this.respostas = respostas;
 	}
 	
-	public int getIndireRespostaCorreta() {
+	public int getIndiceRespostaCorreta() {
 		return indiceRespostaCorreta;
 	}
 	
-	public void setIndireRespostaCorreta(int indireRespostaCorreta) {
-		this.indiceRespostaCorreta = indireRespostaCorreta;
+	public void setIndiceRespostaCorreta(int indiceRespostaCorreta) {
+		this.indiceRespostaCorreta = indiceRespostaCorreta;
+	}
+	
+	public boolean isRepostaCorreta( int indiceResposta ) {
+		if( this.indiceRespostaCorreta == indiceResposta ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public float valorResposta( int indiceResposta ) {
+		if( this.indiceRespostaCorreta == indiceResposta ) {
+			return this.getPeso() * this.getValor();
+		}
+		else {
+			return 0.0f;
+		}
 	}
 }

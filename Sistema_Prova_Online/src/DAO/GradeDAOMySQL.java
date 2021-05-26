@@ -32,8 +32,13 @@ public class GradeDAOMySQL implements GradeDAO {
 		// https://github.com/stleary/JSON-java
 		JSONArray json = new JSONArray();
 		int n = grade.getDisciplinas().size();
+		int m = 0;
 		for( int i=0; i<n; i++ ) {
-			JSONArray jsonTemp = new JSONArray( grade.getDisciplinas().get(i).toArray() );
+			JSONArray jsonTemp = new JSONArray();
+			m = grade.getDisciplinas().get(i).size();
+			for( int j=0; j<m; j++ ) {
+				jsonTemp.put( grade.getDisciplinas().get(i).get(j).getCodigo() );
+			}
 			json.put(jsonTemp);
 		}
 		
@@ -52,8 +57,13 @@ public class GradeDAOMySQL implements GradeDAO {
 		// https://github.com/stleary/JSON-java
 		JSONArray json = new JSONArray();
 		int n = grade.getDisciplinas().size();
+		int m = 0;
 		for( int i=0; i<n; i++ ) {
-			JSONArray jsonTemp = new JSONArray( grade.getDisciplinas().get(i).toArray() );
+			JSONArray jsonTemp = new JSONArray();
+			m = grade.getDisciplinas().get(i).size();
+			for( int j=0; j<m; j++ ) {
+				jsonTemp.put( grade.getDisciplinas().get(i).get(j).getCodigo() );
+			}
 			json.put(jsonTemp);
 		}
 				
@@ -85,7 +95,7 @@ public class GradeDAOMySQL implements GradeDAO {
 				ArrayList<ArrayList<Disciplina>> disciplinas = new ArrayList<ArrayList<Disciplina>>();
 				
 				// https://github.com/stleary/JSON-java
-				JSONArray json = new JSONArray( rs.getString("disciplinas") );
+				JSONArray json = new JSONArray( rs.getString("fk_disciplinas") );
 				int n = json.length();
 				for( int i=0; i<n; i++ ) {
 					int m = json.getJSONArray(i).length();

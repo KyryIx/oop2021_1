@@ -1,16 +1,22 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import DAO.AlunoDAOMySQL;
 import DAO.CursoDAOMySQL;
 import DAO.DisciplinaDAOMySQL;
 import DAO.GradeDAOMySQL;
+import DAO.NotaDAOMySQL;
 import DAO.ProfessorDAOMySQL;
+import DAO.QuestaoDAOMySQL;
 import DAO.TurmaDAOMySQL;
 import Objetos.Aluno;
+import Objetos.Avaliacao;
 import Objetos.Curso;
 import Objetos.Disciplina;
 import Objetos.Grade;
+import Objetos.Nota;
 import Objetos.Professor;
+import Objetos.Questao;
 import Objetos.Turma;
 
 // "final" -> nao permite criacao de classes filhas
@@ -49,9 +55,8 @@ public final class Sistema {
 		// Formato -> apenas um semestre com duas disciplinas (15245, 15328) no mesmo semestres
 		ArrayList<ArrayList<Disciplina>> semestresTipo1 = new ArrayList<ArrayList<Disciplina>>();
 		semestresTipo1.add( new ArrayList<Disciplina>() );
-		semestresTipo1.add( new ArrayList<Disciplina>() );
-		semestresTipo1.get(0).set(0, disciplina1);
-		semestresTipo1.get(0).set(1, disciplina2);
+		semestresTipo1.get(0).add(disciplina1);
+		semestresTipo1.get(0).add(disciplina2);
 		
 		grade1.setDisciplinas( semestresTipo1 );
 		
@@ -62,11 +67,12 @@ public final class Sistema {
 		
 		// Formato -> dois semestres com apenas uma disciplina em cada semestre (15245, 15328)
 		ArrayList<ArrayList<Disciplina>> semestresTipo2 = new ArrayList<ArrayList<Disciplina>>();
-		semestresTipo1.add( new ArrayList<Disciplina>() );
-		semestresTipo1.get(0).add(disciplina1);
-		semestresTipo1.get(0).add(disciplina2);
+		semestresTipo2.add( new ArrayList<Disciplina>() );
+		semestresTipo2.add( new ArrayList<Disciplina>() );
+		semestresTipo2.get(0).add(disciplina1);
+		semestresTipo2.get(1).add(disciplina2);
 		
-		grade1.setDisciplinas( semestresTipo2 );
+		grade2.setDisciplinas( semestresTipo2 );
 		
 		gradeDaoMySQL.inserirGrade( grade2 );
 		
@@ -133,132 +139,87 @@ public final class Sistema {
 		
 		alunoDaoMySQL.fechar();
 		
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DAS QUESTOES NO SISTEMA //////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		QuestaoDAOMySQL questaoDaoMySQL = new QuestaoDAOMySQL();
 		
-		
-	/*	
-		Avaliacao avaliacao1 = new Avaliacao();
-		
-		///////// DEFINICAO DAS QUESTOES DA AVALIACAO 1 ///////// 
-		ArrayList<Questao> questoes = new ArrayList<Questao>();
-		
-		Questao questao = new Questao();
-		questao.setPeso( 1.0f );
-		questao.setDescricao( "Qual o resultado da expressao 1 + 1?" );
+		Questao questao1 = new Questao();
+		questao1.setCodigo( 1564 );
+		questao1.setValor( 1.0f );
+		questao1.setPeso( 1.0f );
+		questao1.setDescricao( "Qual o resultado da expressao 1 + 1?" );
 		ArrayList<String> respostas = new ArrayList<String>();
 		respostas.add( "10" );
 		respostas.add( "2" );
 		respostas.add( "0" );
 		respostas.add( "1" );
 		respostas.add( "Nenhumas das anteriores" );
-		questao.setRespostas( respostas );
-		questao.setIndireRespostaCorreta( 1 );
-		questoes.add( questao );
+		questao1.setRespostas( respostas );
+		questao1.setIndiceRespostaCorreta( 1 );
 		
-		questao = new Questao();
-		questao.setPeso( 3.0f );
-		questao.setDescricao( "Qual a cor branca do cavalo de Napoleão?" );
+		questaoDaoMySQL.inserirQuestao( questao1 );
+		
+		Questao questao2 = new Questao();
+		questao2.setCodigo( 1565 );
+		questao2.setValor( 1.5f );
+		questao2.setPeso( 1.0f );
+		questao2.setDescricao( "Qual a cor branca do cavalo de Napoleão?" );
 		respostas = new ArrayList<String>();
 		respostas.add( "Branco" );
 		respostas.add( "Preto" );
-		respostas.add( "Marrom" );
+		respostas.add( "Cinza" );
 		respostas.add( "Azul escuro" );
 		respostas.add( "Nenhumas das anteriores" );
-		questao.setRespostas( respostas );
-		questao.setIndireRespostaCorreta( 2 );
-		questoes.add( questao );
+		questao2.setRespostas( respostas );
+		questao2.setIndiceRespostaCorreta( 2 );
+		
+		questaoDaoMySQL.inserirQuestao( questao2 );
+		
+		questaoDaoMySQL.fechar();
+		
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DAS NOTAS NO SISTEMA /////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		NotaDAOMySQL notaDaoMySQL = new NotaDAOMySQL();
+		
+		Nota nota1 = new Nota();
+		nota1.setCodigo( 46164 );
+		nota1.setValor( 0.0f ); // pois o aluno ainda nao fez a prova
+		nota1.setPeso( 100.0f );
+		
+		notaDaoMySQL.inserirNota( nota1 );
+		
+		notaDaoMySQL.fechar();
+		
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DA AVALIACAO NO SISTEMA //////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		Avaliacao avaliacao1 = new Avaliacao();
+		avaliacao1.setCodigo( 876167 );
+		avaliacao1.setAluno( aluno1 );
+		avaliacao1.setProfessor( professor1 );
+		avaliacao1.setDisciplina( disciplina1 );
+		avaliacao1.setTurma( turma1 );
+		avaliacao1.setNota( nota1 );
+		
+		ArrayList<Questao> questoes = new ArrayList<Questao>();
+		questoes.add( questao1 );
+		questoes.add( questao2 );
 		
 		avaliacao1.setQuestoes( questoes );
 		
-//		
+		// https://www.devmedia.com.br/trabalhando-com-as-classes-date-calendar-e-simpledateformat-em-java/27401
+		Calendar date = Calendar.getInstance();
+		date.set(2021, Calendar.JUNE, 14 );
+		avaliacao1.setDataAvaliacao( date );
 		
+		avaliacao1.setCurso( curso1 );
 		
-		
-		
-		
-		turma1.setCurso( curso );
-		
-		aluno1.setTurma( turma1 );
-		//aluno1.insertData();
-		
-		avaliacao1.setAluno( aluno1 );
-		avaliacao1.setTurma( turma1 );
-		avaliacao1.setCurso( curso );
-		avaliacao1.setDisciplina( disciplina );
-		Date data = new Date( 2021,4,27,19,0 );
-		avaliacao1.setDataAvaliacao( data );
-		
-		Professor professor = new Professor();
-		professor.setId( 100100789 );
-		professor.setNome( "Everton" );
-		professor.setSobrenome( "Pereira" );
-		professor.setIdade( 41 );
-		ArrayList<Turma> turmas = new ArrayList<Turma>();
-		turmas.add( turma1 );
-		professor.setTurmas( turmas );
-		ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
-		disciplinas.add( disciplina );
-		professor.setDisciplinas( disciplinas );
-		avaliacao1.setProfessor( professor );
-		
-		Nota nota = new Nota();
-		nota.setPeso(  0.40f ); // 40% do semestre
-		avaliacao1.setNota( nota );
-		
-		System.out.println( " NOME DO ALUNO: " +
-				avaliacao1.getAluno().getNome() + " " +
-				avaliacao1.getAluno().getSobrenome() );
-		
-		System.out.println( "    DISCIPLINA: " + 
-		         avaliacao1.getAluno().getDisciplina().getNome() );
-		
-		System.out.println( "         CURSO: " +
-		         avaliacao1.getCurso().getNome() );
-		
-		System.out.println( "     PROFESSOR: " + 
-		         avaliacao1.getProfessor().getNome() );
-		
-		System.out.println( "          DATA: " + 
-		         avaliacao1.getDataAvaliacao().getDay() + "/" +
-				 avaliacao1.getDataAvaliacao().getMonth() + "/" +
-		         avaliacao1.getDataAvaliacao().getYear() );
-		
-		System.out.println( "PESO AVALIACAO: " + 
-		         (avaliacao1.getNota().getPeso()*100) + "%" );
-		
-		Nota av1 = avaliacao1.getNota();
-		av1.setValor( 9.0f );
-		avaliacao1.setNota( av1 );
-		*/
-		// ATIVIDADE PARA A CASA:
-		// 1 - IMPLEMENTAR A EXIBICAO DAS QUESTOES
-		// 2 - AO MESMO TEMPO QUE EXIBE UMA QUESTAO,
-		//     PEDIR A RESPOSTA PARA DAR O RESULTADO
-		//     SE ACERTOU OU ERRO. PARA ISSO USE O
-		//     Scanner DO Java.
-		
-		/*
-		 NOME DO ALUNO: Paulo Rodrigues
-		    DISCIPLINA: Projeto Orientado a Objetos
-		         CURSO: Sistemas de Informação
-		     PROFESSOR: Everton
-		          DATA: 5/4/2021
-		PESO AVALIACAO: 40.0%
-		
-		Questao 1 - Qual o resultado da expressao 1 + 1?
-		Alternatica 1 - Branco
-		Alternatica 2 - Preto
-		Alternatica 3 - Marrom
-		Alternatica 4 - Azul escuro
-		Alternatica 5 - Nenhumas das anteriores
-		
-		Digite o numero da alternativa e pressione ENTER: 2
-		Resposta: INCORRETA (0.0 pontos)
-		*/
-		/*
-		BancoDados banco = new BancoDados();
-		banco.persist(aluno1);
-		banco.persist(professor);
-		*/
+		/////////////////////////////////////////////////////////////////////////////////
+		///////////////////// INSERCAO DA AVALIACAO NO SISTEMA //////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
+		avaliacao1.executarAvaliacao();
 	}
 
 }
